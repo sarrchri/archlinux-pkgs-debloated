@@ -8,6 +8,12 @@ on:
   #  - cron: "0 7 1/7 * *"
   workflow_dispatch:
     inputs:
+      chosen-runner:
+        required: true
+        type: choice
+        options:
+        - self-hosted
+        - ubuntu-24.04
       ONE_PACKAGE:
         description: 'Set to the name of only one package to be built, package name only without -nano or -mini'
         required: false
@@ -31,11 +37,11 @@ jobs:
         include:
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: llvm-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: llvm-nano
           - arch: aarch64
             platform: linux/arm64
@@ -47,7 +53,7 @@ jobs:
             script: llvm-nano
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: libxml2-mini
           - arch: aarch64
             platform: linux/arm64
@@ -55,7 +61,7 @@ jobs:
             script: libxml2-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: qt6-base-mini
           - arch: aarch64
             platform: linux/arm64
@@ -63,7 +69,7 @@ jobs:
             script: qt6-base-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: gtk3-mini
           - arch: aarch64
             platform: linux/arm64
@@ -71,7 +77,7 @@ jobs:
             script: gtk3-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: gtk4-mini
           - arch: aarch64
             platform: linux/arm64
@@ -79,7 +85,7 @@ jobs:
             script: gtk4-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: gdk-pixbuf2-mini
           - arch: aarch64
             platform: linux/arm64
@@ -87,7 +93,7 @@ jobs:
             script: gdk-pixbuf2-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: librsvg-mini
           - arch: aarch64
             platform: linux/arm64
@@ -95,7 +101,7 @@ jobs:
             script: librsvg-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: ffmpeg-mini
           - arch: aarch64
             platform: linux/arm64
@@ -103,7 +109,7 @@ jobs:
             script: ffmpeg-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: opus-mini
           - arch: aarch64
             platform: linux/arm64
@@ -111,7 +117,7 @@ jobs:
             script: opus-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: mesa-mini
           - arch: aarch64
             platform: linux/arm64
@@ -119,7 +125,7 @@ jobs:
             script: mesa-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: mesa-nano
           - arch: aarch64
             platform: linux/arm64
@@ -127,7 +133,7 @@ jobs:
             script: mesa-nano
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: mangohud-mini
           - arch: aarch64
             platform: linux/arm64
@@ -135,7 +141,7 @@ jobs:
             script: mangohud-mini
           - arch: x86_64
             platform: linux/amd64
-            runs-on: self-hosted
+            runs-on: "${{ inputs.chosen-os }}"
             script: intel-media-driver-mini
     container:
       image: ghcr.io/pkgforge-dev/archlinux:latest
